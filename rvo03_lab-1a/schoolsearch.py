@@ -1,6 +1,6 @@
 import os 
 
-STUDENTS_PATH = 'csc365/rvo03_lab-1a/students.txt' # change path if needed
+STUDENTS_PATH = 'rvo03_lab-1a/students.txt' # change path if needed
 
 def parse_students():
     students = []
