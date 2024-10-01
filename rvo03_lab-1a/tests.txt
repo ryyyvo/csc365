@@ -1,0 +1,131 @@
+// CSC 365
+// Lab 1-a test suite
+
+// TC-1
+// Tests Requirements R3, R4
+// short form command name, existing student
+// expected output: HAVIR BOBBIE 2 108 HAMER GAVIN
+S HAVIR
+
+// TC-2
+// Tests Requirements R3, R4
+// short form command name, non-existing student
+// expected output: <empty line>
+S NEMO
+
+// TC-3
+// Tests Requirements R3, R12
+// quit command
+// expected output: program terminates
+Q
+
+// TC-4 
+// Tests Requirements R3, R5
+// long form command name, existing student and their bus route
+// expected output: CORKER CARTER 53
+STUDENT CORKER BUS
+
+// TC-5
+// Tests Requirements R3, R5
+// long form command name, existing student with no bus route 
+// expected output: HAVIR BOBBIE 0
+STUDENT HAVIR BUS 
+
+// TC-6 
+// Tests Requirements R3, R6 
+// long form command name, existing teacher
+// expected output: 
+// LIBRANDI TODD
+// HAVIR BOBBIE
+// SARAO DIEDRA
+// VANCOTT MIKE
+// WICINSKY TERESE
+// KOZOLA BUSTER
+// MULLINGS LEIGHANN
+// BUSSMANN BILLY
+// BERBES DICK
+// MULGREW RANDELL
+// TOWLEY LANE
+TEACHER HAMER
+
+// TC-7 
+// Tests Requirements R3, R7
+// long form command name, existing grade with students
+// expected output:
+// SAELEE DANILO
+// GARTH JOHN
+GRADE 1
+
+// TC-8 
+// Tests Requirements R3, R7
+// long form command name, existing grade with no students
+// expected output: <empty line>
+GRADE 0
+
+// TC-9
+// Tests Requirements R3, R7
+// long form command name, nonexisting grade
+// expected output: <empty line>
+GRADE 7
+
+// TC-10
+// Tests Requirements R3, R8
+// long form command, existing bus number 
+// expected output: 
+// WOOLERY NOLAN 2 104
+// STERBACK PETER 6 111
+// LIBRANDI TODD 2 108
+// RAPOSE ALONZO 4 105
+// COVINGTON TOMAS 3 107
+// MULLINGS LEIGHANN 2 108
+// DURAND CARLEE 4 101
+// FRIEDSTROM REED 6 106
+BUS 51 
+
+// TC-11
+// Tests Requirements R3, R8
+// long form command, nonexisting bus number 
+// expected output: <empty line>
+BUS 1
+
+// TC-12
+// Tests Requirements R3, R9
+// long form command, high
+// expected output: WICINSKY TERESE 3.22 HAMER GAVIN 53
+GRADE 2 HIGH 
+
+// TC-13
+// Tests Requirements R3, R9
+// long form command, low
+// expected output: KOZOLA BUSTER 2.76 HAMER GAVIN 55
+GRADE 2 LOW
+
+// TC-14
+// Tests Requirements R3, R10
+// long form command, existing grade
+// expected output: 6 2.98
+AVERAGE 6
+
+// TC-15
+// Tests Requirements R3, R10
+// long form command, nonexisting grade
+// expected output: <empty line>
+AVERAGE 8
+
+// TC-16
+// Tests Requirements R3, R10
+// long form command, existing grade with no students
+// expected output: <empty line>
+AVERAGE 5
+
+// TC-17
+// Tests Requirements R3, R11
+// long form command
+// expected output: 0: 0, 1: 2, 2: 13, 3: 9, 4: 15, 5: 0, 6: 21
+INFO 
+
+// TC-18
+// Tests Requirements R3, R11
+// long form command
+// expected output: 0: 0, 1: 2, 2: 13, 3: 9, 4: 15, 5: 0, 6: 21
+I

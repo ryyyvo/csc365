@@ -51,7 +51,7 @@ def find_by_grade(grade, students): #R7
 def find_by_bus(route, students): #R8
     for student in students:
         if student['Bus'] == route:
-            print(student['StLastName'], student['StFirstName'], student['GPA'], student['Classroom'])
+            print(student['StLastName'], student['StFirstName'], student['Grade'], student['Classroom'])
 
 def find_by_grade_high_low(grade, lowhigh, students): #R9
     temp = False
@@ -71,7 +71,6 @@ def find_by_grade_high_low(grade, lowhigh, students): #R9
                     tempGPA = float(student['GPA'])
                     temp = student
     if not temp:
-        print('No students in the grade')
         return
     print(temp['StLastName'], temp['StFirstName'], temp['GPA'], temp['TLastName'], temp['TFirstName'], temp['Bus'])
                     
@@ -84,7 +83,6 @@ def find_by_average(grade, students): #R10
             totalGP += float(student['GPA'])
             numberOfStudents += 1
     if numberOfStudents == 0:
-        print('No students in the grade')
         return
     gradeLevelGPA = round(totalGP/numberOfStudents, 2)
     print(grade, gradeLevelGPA)
@@ -106,7 +104,6 @@ def main():
     if not os.path.exists(STUDENTS_PATH):
         print("students.txt does not exist.")
         exit(1)
-    print("students.txt does exist.")
     students = parse_students()
     while (True):
         user_input = input("Please input a search instruction: ")
