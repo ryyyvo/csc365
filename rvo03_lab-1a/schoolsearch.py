@@ -58,13 +58,13 @@ def find_by_grade_high_low(grade, lowhigh, students): #R9
     tempGPA = False
     for student in students:
         if student['Grade'] == grade:
-            if lowhigh == "High" or lowhigh == "H":
+            if lowhigh == "HIGH" or lowhigh == "H":
                 if not tempGPA:
                     tempGPA = 0 
                 if float(student['GPA']) >= tempGPA:
                     tempGPA = float(student['GPA'])
                     temp = student
-            elif lowhigh == "Low" or lowhigh == "L":
+            elif lowhigh == "LOW" or lowhigh == "L":
                 if not tempGPA:
                     tempGPA = 5
                 if float(student['GPA']) <= tempGPA:
@@ -111,30 +111,30 @@ def main():
     while (True):
         user_input = input("Please input a search instruction: ")
 
-        instruction = user_input.split()
+        instruction = (user_input.upper()).split()
 
         if len(instruction) == 1:
-            if (instruction[0] == "Q") or (instruction[0] == "Quit"): #R12
+            if (instruction[0] == "Q") or (instruction[0] == "QUIT"): #R12
                 exit(0)
-            elif (instruction[0] == "I") or (instruction[0] == "Info"): #R11
+            elif (instruction[0] == "I") or (instruction[0] == "INFO"): #R11
                 info(students)
 
         elif len(instruction) == 2:
-            if (instruction[0] == "S") or (instruction[0] == "Student"): #R4
+            if (instruction[0] == "S") or (instruction[0] == "STUDENT"): #R4
                 find_by_StLastName(instruction[1], students)
-            elif (instruction[0] == "T") or (instruction[0] == "Teacher"): #R6
+            elif (instruction[0] == "T") or (instruction[0] == "TEACHER"): #R6
                 find_by_TLastName(instruction[1], students)
-            elif (instruction[0] == "G") or (instruction[0] == "Grade"): #R7
+            elif (instruction[0] == "G") or (instruction[0] == "GRADE"): #R7
                 find_by_grade(int(instruction[1]), students)
-            elif (instruction[0] == "B") or (instruction[0] == "Bus"): #R8
+            elif (instruction[0] == "B") or (instruction[0] == "BUS"): #R8
                 find_by_bus(int(instruction[1]), students)
-            elif (instruction[0] == "A") or (instruction[0] == "Average"): #R10
+            elif (instruction[0] == "A") or (instruction[0] == "AVERAGE"): #R10
                 find_by_average(int(instruction[1]), students)
 
         elif len(instruction) == 3:
-            if (instruction[0] == "S" or instruction[0] == "Student") and (instruction[2] == "B" or instruction[2] == "Bus"): #R5
+            if (instruction[0] == "S" or instruction[0] == "STUDENT") and (instruction[2] == "B" or instruction[2] == "BUS"): #R5
                 find_by_StLastName_bus(instruction[1], students)
-            if (instruction[0] == "G") or (instruction[0] == "Grade"): #R9
+            if (instruction[0] == "G") or (instruction[0] == "GRADE"): #R9
                 find_by_grade_high_low(int(instruction[1]), instruction[2], students)
 
 
