@@ -85,7 +85,8 @@ def parse_classrooms(students, teachers):
                         "TFirstName": [teacher["TFirstName"]],
                         "StLastName": [],
                         "StFirstName": [],
-                        "TotalStudents": 0
+                        "TotalStudents": 0,
+                        "Grade": None 
                         }
             classrooms[teacher["Classroom"]] = classroom
         else:
@@ -100,20 +101,22 @@ def parse_classrooms(students, teachers):
                         "TFirstName": [],
                         "StLastName": [student["StLastName"]],
                         "StFirstName": [student["StFirstName"]],
-                        "TotalStudents": 1
+                        "TotalStudents": 1,
+                        "Grade": student["Grade"]
                         }
             classrooms[student["Classroom"]] = classroom
         else:
             classrooms[student["Classroom"]]["StLastName"].append(student["StLastName"])
             classrooms[student["Classroom"]]["StFirstName"].append(student["StFirstName"])
             classrooms[student["Classroom"]]["TotalStudents"] += 1 
+            classrooms[student["Classroom"]]["Grade"] = student["Grade"]
         
     return classrooms
 
 def find_by_StLastName(lastname, students, classrooms): #R4
     for student in students:
         if student['StLastName'] == lastname:
-            print(student['StLastName'], student['StFirstName'], student['Grade'], student['Classroom'], classrooms[student["Classroom"]]["TLastName"][0], classrooms[student["Classroom"]]["TFirstName"][0]) 
+            print(student['StLastName'], student['StFirstName'], student['Grade'], student['Classroom'], classrooms[student["Classroom"]]["TLastName"], classrooms[student["Classroom"]]["TFirstName"]) 
             # maybe print out items from list instead of printing out list
 
 def find_by_StLastName_bus(lastname, students): #R5
@@ -137,7 +140,7 @@ def find_by_bus(route, students): #R8
         if student['Bus'] == route:
             print(student['StLastName'], student['StFirstName'], student['Grade'], student['Classroom'])
 
-def find_by_grade_high_low(grade, lowhigh, students): #R9
+def find_by_grade_high_low(grade, lowhigh, students, classrooms): #R9
     temp = False
     tempGPA = False
     for student in students:
@@ -156,7 +159,8 @@ def find_by_grade_high_low(grade, lowhigh, students): #R9
                     temp = student
     if not temp:
         return
-    print(temp['StLastName'], temp['StFirstName'], temp['GPA'], temp['TLastName'], temp['TFirstName'], temp['Bus'])
+
+    print(temp['StLastName'], temp['StFirstName'], temp['GPA'], classrooms[temp['Classroom']]['TLastName'], classrooms[temp['Classroom']]['TFirstName'], temp['Bus'])
                     
 
 def find_by_average(grade, students): #R10
@@ -184,10 +188,22 @@ def info(students): #R11
           '6: ' + str(totalStudentsPerGrade['6'])
           )
     
-def find_by_classroom(number, classrooms): #NR1 
+def find_students_by_classroom(number, classrooms): #NR1 
     if number in classrooms:
         for i in range(len(classrooms[number]["StLastName"])):
             print(classrooms[number]["StLastName"][i], classrooms[number]["StFirstName"][i])
+
+def find_teachers_by_classroom(number, classrooms): #NR2
+    if number in classrooms:
+        for i in range(len(classrooms[number]["TLastName"])):
+            print(classrooms[number]["TLastName"][i], classrooms[number]["TFirstName"][i])
+
+def find_teachers_by_grade(number, classrooms): #NR3
+    for value in classrooms.values():
+        # if number in classrooms["Grade"]:
+        if number == value["Grade"]:
+            for i in range(len(value["TLastName"])):
+                print(value["TLastName"][i], value["TFirstName"][i])
 
 def main():
     if not os.path.exists(STUDENTS_PATH):
@@ -221,14 +237,19 @@ def main():
                 find_by_bus(int(instruction[1]), students)
             elif (instruction[0] == "A") or (instruction[0] == "AVERAGE"): #R10
                 find_by_average(int(instruction[1]), students)
-            elif (instruction[0] == "C") or (instruction[0] == "CLASSROOM"): #NR1
-                find_by_classroom(int(instruction[1]), classrooms)
 
         elif len(instruction) == 3:
             if (instruction[0] == "S" or instruction[0] == "STUDENT") and (instruction[2] == "B" or instruction[2] == "BUS"): #R5
                 find_by_StLastName_bus(instruction[1], students)
-            if (instruction[0] == "G") or (instruction[0] == "GRADE"): #R9
-                find_by_grade_high_low(int(instruction[1]), instruction[2], students)
+            elif (instruction[0] == "G" or instruction[0] == "GRADE") and (instruction[2] == "T" or instruction[2] == "TEACHER"): #NR3
+                find_teachers_by_grade(int(instruction[1]), classrooms)
+            elif (instruction[0] == "G") or (instruction[0] == "GRADE"): #R9
+                find_by_grade_high_low(int(instruction[1]), instruction[2], students, classrooms)
+            elif (instruction[0] == "C" or instruction[0] == "CLASSROOM") and (instruction[2] == "S" or instruction[2] == "STUDENT"): #NR1
+                find_students_by_classroom(int(instruction[1]), classrooms)
+            elif (instruction[0] == "C" or instruction[0] == "CLASSROOM") and (instruction[2] == "T" or instruction[2] == "TEACHER"): #NR2
+                find_teachers_by_classroom(int(instruction[1]), classrooms)
+
 
 if __name__ == '__main__':
     main()
