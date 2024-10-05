@@ -104,19 +104,19 @@ GRADE 2 LOW
 // Tests Requirements R3, R10
 // long form command, existing grade
 // expected output: 6 2.98
-AVERAGE 6
+AVERAGE 6 GRADE
 
 // TC-15
 // Tests Requirements R3, R10
 // long form command, nonexisting grade
 // expected output: <empty line>
-AVERAGE 8
+AVERAGE 8 GRADE
 
 // TC-16
 // Tests Requirements R3, R10
 // long form command, existing grade with no students
 // expected output: <empty line>
-AVERAGE 5
+AVERAGE 5 GRADE
 
 // TC-17
 // Tests Requirements R3, R11
@@ -147,13 +147,101 @@ c 103 s
 classroom 103 student
 
 // TC-21
+// Tests Requirements NR1
+// long form command, nonexistent
+// expected output: <empty line>
+classroom 1 student
+
+// TC-22
 // Tests Requirements NR2
 // short form command
 // expected output: FALKER ADOLPH
 c 103 t
 
-// TC-22
+// TC-23
 // Tests Requirements NR2
 // long form command
 // expected output: FALKER ADOLPH
 classroom 103 teacher
+
+// TC-24
+// Tests Requirements NR2
+// long form command, nonexistent
+// expected output: <empty line>
+classroom 1 teacher
+
+// TC-25
+// Tests Requirements NR3
+// short form command
+// expected output: 
+// STEIB GALE
+// HAMER GAVIN
+g 2 t
+
+// TC-26
+// Tests Requirements NR3
+// long form command
+// expected output: 
+// STEIB GALE
+// HAMER GAVIN
+grade 2 teacher
+
+// TC-27
+// Tests Requirements NR3
+// long form command, nonexistent
+// expected output: <empty line>
+grade 5 teacher
+
+// TC-28
+// Tests Requirements NR4
+// command 
+// expected output: 
+// 101: 1
+// 102: 5
+// 103: 2
+// 104: 2
+// 105: 6
+// 106: 2
+// 107: 7
+// 108: 11
+// 109: 5
+// 110: 2
+// 111: 9
+// 112: 8
+e
+
+// TC-29
+// Tests Requirements NR5
+// long form command
+// expected output: HANTZ 2.91
+average hantz teacher
+
+// TC-30
+// Tests Requirements NR5
+// short form command
+// expected output: HANTZ 2.91
+a hantz t
+
+// TC-31
+// Tests Requirements NR5
+// short form command, nonexistent
+// expected output: <empty line>
+a vo t
+
+// TC-32
+// Tests Requirements NR5
+// long form command
+// expected output: 53 3.06
+average 53 bus
+
+// TC-33
+// Tests Requirements NR5
+// short form command
+// expected output: 53 3.06
+a 53 b
+
+// TC-33
+// Tests Requirements NR5
+// short form command, nonexistent
+// expected output: <empty line>
+a 1 b
