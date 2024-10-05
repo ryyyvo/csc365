@@ -3,17 +3,17 @@
 
 • Requirement NR2. Given a classroom number, find the teacher (or teachers) teaching
 
-in it (In our test file, there in one teacher per classroom. 
+in it (In our test file, there in one teacher per classroom.
 However, your search algorithm cannot assume that it will
-always be the case. If a classroom has multiple teachers 
+always be the case. If a classroom has multiple teachers
 they should be considered co-teachers. All co-teachers of
 a classroom should be included wherever teacher information is printed.)
 
 • Requirement NR3. Given a grade, find all teachers who teach it.
 
-• Requirement NR4. Report the enrollments broken down by classroom 
+• Requirement NR4. Report the enrollments broken down by classroom
 (i.e., output a
-list of classrooms ordered by classroom number, 
+list of classrooms ordered by classroom number,
 with a total number of students in each
 of the classrooms).
 
@@ -234,31 +234,39 @@ def get_enrollment_by_classroom(classrooms):  # NR4
 
 
 # average gpa by teacher
-def find_gpa_by_teacher(grade, students):  # R10
+def find_gpa_by_teacher(TLastName, students, teachers, classrooms):  # NR5
     totalGP = 0
     numberOfStudents = 0
-    for student in students:
-        if student['Grade'] == grade:
-            totalGP += float(student['GPA'])
-            numberOfStudents += 1
+    classroom = None
+    for teacher in teachers:
+        if teacher['TLastName'] == TLastName:
+            classroom = teacher['Classroom']
+    if not classroom:
+        return
+    if classrooms[classroom]:
+        for name in classrooms[classroom]['StLastName']:
+            for student in students:
+                if name == student['StLastName']:
+                    totalGP += float(student['GPA'])
+                    numberOfStudents += 1
     if numberOfStudents == 0:
         return
     gradeLevelGPA = round(totalGP/numberOfStudents, 2)
-    print(grade, gradeLevelGPA)
+    print(TLastName, gradeLevelGPA)
 
 
 # average gpa by bus route
-def find_gpa_by_bus(grade, students):  # R10
+def find_gpa_by_bus(bus, students):  # NR5
     totalGP = 0
     numberOfStudents = 0
     for student in students:
-        if student['Grade'] == grade:
+        if student['Bus'] == bus:
             totalGP += float(student['GPA'])
             numberOfStudents += 1
     if numberOfStudents == 0:
         return
     gradeLevelGPA = round(totalGP/numberOfStudents, 2)
-    print(grade, gradeLevelGPA)
+    print(bus, gradeLevelGPA)
 
 
 def main():
@@ -293,8 +301,6 @@ def main():
                 find_by_grade(int(instruction[1]), students)
             elif (instruction[0] == "B") or (instruction[0] == "BUS"):  # R8
                 find_by_bus(int(instruction[1]), students)
-            elif (instruction[0] == "A") or (instruction[0] == "AVERAGE"):  # R10
-                find_gpa_by_grade(int(instruction[1]), students)
 
         elif len(instruction) == 3:
             if (instruction[0] == "S" or instruction[0] == "STUDENT") and (instruction[2] == "B" or instruction[2] == "BUS"):  # R5
@@ -308,6 +314,15 @@ def main():
             elif (instruction[0] == "G") or (instruction[0] == "GRADE"):  # R9
                 find_by_grade_high_low(
                     int(instruction[1]), instruction[2], students, classrooms)
+            elif (instruction[0] == "A") or (instruction[0] == "AVERAGE"):
+                if (instruction[2] == "G" or instruction[2] == "GRADE"):  # R10
+                    find_gpa_by_grade(int(instruction[1]), students)
+                if (instruction[2] == "T" or instruction[2] == "TEACHER"):  # NR5
+                    find_gpa_by_teacher(
+                        instruction[1], students, teachers, classrooms)
+                if (instruction[2] == "B" or instruction[2] == "BUS"):  # NR5
+                    find_gpa_by_bus(
+                        int(instruction[1]), students)
 
 
 if __name__ == '__main__':

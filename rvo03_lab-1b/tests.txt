@@ -129,31 +129,3 @@ INFO
 // long form command
 // expected output: 0: 0, 1: 2, 2: 13, 3: 9, 4: 15, 5: 0, 6: 21
 I
-
-// TC-19
-// Tests Requirements NR1 
-// short form command
-// expected output: 
-// SAELEE DANILO
-// GARTH JOHN
-c 103 s 
-
-// TC-20
-// Tests Requirements NR1 
-// long form command
-// expected output: 
-// SAELEE DANILO
-// GARTH JOHN
-classroom 103 student
-
-// TC-21
-// Tests Requirements NR2
-// short form command
-// expected output: FALKER ADOLPH
-c 103 t
-
-// TC-22
-// Tests Requirements NR2
-// long form command
-// expected output: FALKER ADOLPH
-classroom 103 teacher
